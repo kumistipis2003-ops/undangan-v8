@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "v9-undangan-digital",
   "version": "1.0.0",
   "description": "Platform Web Undangan Digital MVP (Tahap 1)",
@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "node src/app.js"
+  },
+  "engines": {
+    "node": "22.x"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
