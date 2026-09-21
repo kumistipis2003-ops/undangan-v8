@@ -1,0 +1,211 @@
+/* ============================================================
+   TEMA: JAWA GEBYOK JOGLO
+   Karakter: Kayu Jati Klasik, Ukiran Gebyok, Gunungan Wayang, Emas Antik
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Prata&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+
+:root {
+  --theme-font-title: 'Cinzel', serif;
+  --theme-font-script: 'Prata', serif;
+  --theme-font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --theme-bg-primary: #23120b;
+  --theme-bg-secondary: #341a0e;
+  --theme-bg-card: rgba(43, 22, 13, 0.88);
+  --theme-border-color: #c99e42;
+  --theme-accent-gold: #e5be6b;
+  --theme-accent-dark: #190a04;
+  --theme-text-light: #fef7ea;
+  --theme-text-muted: #d0bba6;
+  --theme-text-gold: #ffd680;
+  
+  --theme-btn-bg: linear-gradient(135deg, #c99e42, #8f6920);
+  --theme-btn-text: #190a04;
+  --theme-btn-border: 2px solid #ffd680;
+  --theme-btn-radius: 4px;
+}
+
+body.theme-gebyok-joglo {
+  font-family: var(--theme-font-body);
+  background-color: var(--theme-bg-primary);
+  color: var(--theme-text-light);
+  /* Ornate wood carving SVG background pattern */
+  background-image: radial-gradient(circle at center, rgba(65, 34, 18, 0.6) 0%, rgba(25, 10, 4, 0.95) 100%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c99e42' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M30 30L15 15l15-15 15 15-15 15zm0 0l15 15-15 15-15-15 15-15zm-15-15L0 0l15 15-15 15 15-15zm30 0l15-15-15 15 15 15-15-15z'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+.theme-gebyok-joglo .invitation-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  border-left: 2px solid var(--theme-border-color);
+  border-right: 2px solid var(--theme-border-color);
+  background: var(--theme-bg-primary);
+}
+
+/* Cover & Hero */
+.theme-gebyok-joglo .cover-section {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, rgba(35, 18, 11, 0.7) 0%, rgba(20, 8, 3, 0.95) 100%);
+  position: relative;
+}
+
+.theme-gebyok-joglo .ornament-gunungan {
+  width: 90px;
+  height: 120px;
+  margin: 0 auto 1.5rem auto;
+  filter: drop-shadow(0 4px 10px rgba(201, 158, 66, 0.4));
+  animation: floatJoglo 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatJoglo {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+.theme-gebyok-joglo .guest-badge {
+  background: rgba(52, 26, 14, 0.9);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 4px;
+  padding: 1.25rem 1.75rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(201, 158, 66, 0.15);
+  position: relative;
+}
+
+.theme-gebyok-joglo .guest-badge::before {
+  content: '❖';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--theme-accent-gold);
+  background: var(--theme-bg-secondary);
+  padding: 0 8px;
+  font-size: 14px;
+}
+
+.theme-gebyok-joglo .guest-name-highlight {
+  font-family: var(--theme-font-title);
+  font-size: 1.4rem;
+  color: var(--theme-text-gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Sections & Cards */
+.theme-gebyok-joglo .content-section {
+  padding: 3rem 1.5rem;
+  position: relative;
+}
+
+.theme-gebyok-joglo .card-box {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 4px;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.theme-gebyok-joglo .card-box::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(201, 158, 66, 0.4);
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.theme-gebyok-joglo .section-title {
+  font-family: var(--theme-font-title);
+  font-size: 1.6rem;
+  color: var(--theme-text-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.theme-gebyok-joglo .couple-name {
+  font-family: var(--theme-font-script);
+  font-size: 2.2rem;
+  color: #fff;
+  margin: 0.5rem 0;
+  line-height: 1.2;
+}
+
+.theme-gebyok-joglo .ampersand {
+  font-family: var(--theme-font-title);
+  font-size: 2.5rem;
+  color: var(--theme-accent-gold);
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* Buttons */
+.theme-gebyok-joglo .btn-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+  font-family: var(--theme-font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  padding: 0.9rem 2rem;
+  border: var(--theme-btn-border);
+  border-radius: var(--theme-btn-radius);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(201, 158, 66, 0.4);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.theme-gebyok-joglo .btn-theme:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(201, 158, 66, 0.6);
+  filter: brightness(1.1);
+}
+
+/* Countdown */
+.theme-gebyok-joglo .countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.theme-gebyok-joglo .countdown-item {
+  background: rgba(25, 10, 4, 0.8);
+  border: 1px solid var(--theme-border-color);
+  padding: 0.75rem 0.25rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.theme-gebyok-joglo .countdown-num {
+  font-family: var(--theme-font-title);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--theme-text-gold);
+}
+
+.theme-gebyok-joglo .countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--theme-text-muted);
+  letter-spacing: 1px;
+}

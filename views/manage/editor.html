@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Editor Undangan — Panel Penyewa</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/editor.css">
+</head>
+<body>
+  <div class="editor-wrapper">
+    <!-- Header -->
+    <header class="editor-header">
+      <div class="editor-title-box">
+        <span style="font-size:1.3rem;">💌</span>
+        <div id="header-invitation-title" class="editor-title">Memuat Undangan...</div>
+      </div>
+
+      <div class="editor-actions">
+        <a id="header-preview-btn" href="#" target="_blank" class="btn btn-outline btn-sm" title="Pratinjau Tampilan Undangan">
+          👁️ Preview
+        </a>
+        <button id="header-share-btn" class="btn btn-wa btn-sm" title="Bagikan Undangan">
+          📤 Share
+        </button>
+      </div>
+    </header>
+
+    <!-- Top Tabs for Desktop / Tablet -->
+    <nav class="editor-tabs">
+      <button class="editor-tab-btn active" data-tab="home">📊 Ringkasan</button>
+      <button class="editor-tab-btn" data-tab="data">📝 Data Undangan</button>
+      <button class="editor-tab-btn" data-tab="design">🎨 Desain &amp; Tema</button>
+      <button class="editor-tab-btn" data-tab="events">📅 Acara</button>
+      <button class="editor-tab-btn" data-tab="guests">👥 Tamu Undangan</button>
+      <button class="editor-tab-btn" data-tab="rsvp">💌 RSVP &amp; Ucapan</button>
+    </nav>
+
+    <!-- Main Tab Content Area -->
+    <main class="tab-content-area">
+
+      <!-- 1. PANE: HOME / RINGKASAN -->
+      <section id="pane-home" class="editor-pane active">
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <h2 class="editor-card-title">Ringkasan Undangan</h2>
+            <span class="badge badge-success">Akses Aktif</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:1rem;margin-bottom:1.5rem;">
+            <div style="background:#111927;padding:1rem;border-radius:8px;border:1px solid #1e293b;">
+              <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Mempelai</div>
+              <div id="summary-bride-groom" style="font-size:1.1rem;font-weight:700;color:#fff;margin-top:0.25rem;">-</div>
+            </div>
+            <div style="background:#111927;padding:1rem;border-radius:8px;border:1px solid #1e293b;">
+              <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Tanggal Acara</div>
+              <div id="summary-wedding-date" style="font-size:1.1rem;font-weight:700;color:#fff;margin-top:0.25rem;">-</div>
+            </div>
+            <div style="background:#111927;padding:1rem;border-radius:8px;border:1px solid #1e293b;">
+              <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Tema Aktif</div>
+              <div id="summary-theme-name" style="font-size:1.1rem;font-weight:700;color:#60a5fa;margin-top:0.25rem;">-</div>
+            </div>
+            <div style="background:#111927;padding:1rem;border-radius:8px;border:1px solid #1e293b;">
+              <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Total Tamu</div>
+              <div id="summary-guest-count" style="font-size:1.3rem;font-weight:700;color:#34d399;margin-top:0.25rem;">0</div>
+            </div>
+            <div style="background:#111927;padding:1rem;border-radius:8px;border:1px solid #1e293b;">
+              <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Total RSVP Masuk</div>
+              <div id="summary-rsvp-count" style="font-size:1.3rem;font-weight:700;color:#f472b6;margin-top:0.25rem;">0</div>
+            </div>
+            <div style="background:#111927;padding:1rem;border-radius:8px;border:1px solid #1e293b;">
+              <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Konfirmasi Hadir</div>
+              <div id="summary-attending-count" style="font-size:1.3rem;font-weight:700;color:#fbbf24;margin-top:0.25rem;">0 orang</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a id="quick-preview-link" href="#" target="_blank" class="btn btn-outline">
+              👁️ Pratinjau Tampilan Undangan
+            </a>
+            <button class="btn btn-primary" onclick="document.querySelector('[data-tab=\'data\']').click()">
+              ✏️ Lengkapi Data Undangan
+            </button>
+            <button class="btn btn-wa" onclick="document.querySelector('[data-tab=\'guests\']').click()">
+              👥 Kelola &amp; Kirim Undangan Tamu
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. PANE: DATA UNDANGAN -->
+      <section id="pane-data" class="editor-pane">
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <h2 class="editor-card-title">Data Mempelai &amp; Informasi Acara</h2>
+            <button type="submit" form="invitation-data-form" class="btn btn-primary btn-sm">
+              💾 Simpan Perubahan
+            </button>
+          </div>
+
+          <form id="invitation-data-form">
+            <h3 style="font-size:1rem;color:#60a5fa;margin-bottom:1rem;padding-bottom:0.4rem;border-bottom:1px solid #334155;">
+              Mempelai Pria
+            </h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="form-group">
+                <label class="form-label" for="groom_name">Nama Lengkap &amp; Gelar</label>
+                <input type="text" id="groom_name" class="form-control" placeholder="Contoh: Andi Pratama, S.Kom" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="groom_nickname">Nama Panggilan</label>
+                <input type="text" id="groom_nickname" class="form-control" placeholder="Contoh: Andi">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="groom_parents">Nama Orang Tua</label>
+              <input type="text" id="groom_parents" class="form-control" placeholder="Contoh: Putra dari Bpk. Bambang &amp; Ibu Sri">
+            </div>
+
+            <h3 style="font-size:1rem;color:#f472b6;margin:2rem 0 1rem 0;padding-bottom:0.4rem;border-bottom:1px solid #334155;">
+              Mempelai Wanita
+            </h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="form-group">
+                <label class="form-label" for="bride_name">Nama Lengkap &amp; Gelar</label>
+                <input type="text" id="bride_name" class="form-control" placeholder="Contoh: Sinta Nurhaliza, S.E" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="bride_nickname">Nama Panggilan</label>
+                <input type="text" id="bride_nickname" class="form-control" placeholder="Contoh: Sinta">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bride_parents">Nama Orang Tua</label>
+              <input type="text" id="bride_parents" class="form-control" placeholder="Contoh: Putri dari Bpk. Hartono &amp; Ibu Endang">
+            </div>
+
+            <h3 style="font-size:1rem;color:#fbbf24;margin:2rem 0 1rem 0;padding-bottom:0.4rem;border-bottom:1px solid #334155;">
+              Waktu &amp; Lokasi Utama
+            </h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="form-group">
+                <label class="form-label" for="wedding_date">Tanggal Pernikahan</label>
+                <input type="date" id="wedding_date" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="wedding_time">Waktu Acara Utama</label>
+                <input type="text" id="wedding_time" class="form-control" placeholder="Contoh: 08:00 WIB">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="venue_name">Nama Gedung / Tempat</label>
+              <input type="text" id="venue_name" class="form-control" placeholder="Contoh: Sasana Kriya Ballroom">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="venue_address">Alamat Lengkap</label>
+              <textarea id="venue_address" class="form-control" placeholder="Contoh: Jl. Pintu Utama TMII, Cipayung, Jakarta Timur"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="maps_url">Tautan Google Maps</label>
+              <input type="url" id="maps_url" class="form-control" placeholder="Contoh: https://maps.google.com/?q=...">
+            </div>
+
+            <h3 style="font-size:1rem;color:#34d399;margin:2rem 0 1rem 0;padding-bottom:0.4rem;border-bottom:1px solid #334155;">
+              Teks Undangan
+            </h3>
+            <div class="form-group">
+              <label class="form-label" for="opening_text">Teks Pembukaan / Ayat / Salam</label>
+              <textarea id="opening_text" class="form-control" style="min-height:100px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="closing_text">Teks Penutup &amp; Ucapan Terima Kasih</label>
+              <textarea id="closing_text" class="form-control" style="min-height:90px;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;margin-top:1.5rem;padding:0.9rem;">
+              💾 Simpan Perubahan Data
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 3. PANE: DESAIN & TEMA -->
+      <section id="pane-design" class="editor-pane">
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <h2 class="editor-card-title">Pilih Desain &amp; Tema</h2>
+            <span class="badge badge-info">Data Tidak Akan Hilang Saat Ganti Desain</span>
+          </div>
+
+          <p style="font-size:0.875rem;color:#94a3b8;margin-bottom:1.25rem;">
+            Setiap desain memiliki layout, ornamen, tipografi, dan gaya tombol visual yang benar-benar berbeda. Klik pada tema yang Anda inginkan untuk langsung menerapkannya ke undangan.
+          </p>
+
+          <div id="theme-selection-grid" class="theme-picker-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PANE: ACARA -->
+      <section id="pane-events" class="editor-pane">
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <h2 class="editor-card-title">Rangkaian Acara</h2>
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('modal-add-event').classList.add('active')">
+              + Tambah Acara
+            </button>
+          </div>
+
+          <div id="events-list-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PANE: TAMU UNDANGAN -->
+      <section id="pane-guests" class="editor-pane">
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <div>
+              <h2 class="editor-card-title">Daftar Tamu &amp; Guest Link</h2>
+              <p style="font-size:0.8rem;color:#94a3b8;margin-top:0.2rem;">Setiap tamu mendapatkan Guest Link unik dengan nama otomatis.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="document.getElementById('modal-add-guest').classList.add('active')">
+              + Tambah Tamu
+            </button>
+          </div>
+
+          <div id="guests-list-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. PANE: RSVP & UCAPAN -->
+      <section id="pane-rsvp" class="editor-pane">
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <h2 class="editor-card-title">Rekapitulasi Kehadiran (RSVP)</h2>
+          </div>
+          <div id="rsvp-list-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="editor-card">
+          <div class="editor-card-header">
+            <h2 class="editor-card-title">Ucapan &amp; Doa Restu Tamu</h2>
+          </div>
+          <div id="wishes-list-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation (Visible on Smartphone) -->
+    <nav class="mobile-bottom-nav">
+      <button class="mobile-nav-btn active" data-tab="home">
+        <span>📊</span>
+        <span>Home</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="data">
+        <span>📝</span>
+        <span>Data</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="design">
+        <span>🎨</span>
+        <span>Desain</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="events">
+        <span>📅</span>
+        <span>Acara</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="guests">
+        <span>👥</span>
+        <span>Tamu</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="rsvp">
+        <span>💌</span>
+        <span>RSVP</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Modal: Tambah Acara -->
+  <div id="modal-add-event" class="modal-overlay">
+    <div class="modal-box">
+      <h3 style="color:#fff;font-size:1.2rem;margin-bottom:1.25rem;">Tambah Acara Baru</h3>
+      <form id="add-event-form">
+        <div class="form-group">
+          <label class="form-label" for="event_name">Nama Acara</label>
+          <input type="text" id="event_name" class="form-control" placeholder="Contoh: Akad Nikah / Resepsi" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="event_date">Tanggal</label>
+          <input type="date" id="event_date" class="form-control" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label" for="event_start_time">Jam Mulai</label>
+            <input type="text" id="event_start_time" class="form-control" placeholder="Contoh: 08:00 WIB" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="event_end_time">Jam Selesai</label>
+            <input type="text" id="event_end_time" class="form-control" placeholder="Contoh: 11:00 WIB / Selesai">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="event_venue">Lokasi / Tempat</label>
+          <input type="text" id="event_venue" class="form-control" placeholder="Contoh: Masjid Agung At-Tin" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="event_address">Alamat</label>
+          <input type="text" id="event_address" class="form-control" placeholder="Contoh: Jl. Raya TMII, Jakarta Timur">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="event_maps">Tautan Google Maps</label>
+          <input type="url" id="event_maps" class="form-control" placeholder="Contoh: https://maps.google.com/...">
+        </div>
+
+        <div style="display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('modal-add-event').classList.remove('active')">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan Acara</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Tambah Tamu -->
+  <div id="modal-add-guest" class="modal-overlay">
+    <div class="modal-box">
+      <h3 style="color:#fff;font-size:1.2rem;margin-bottom:1.25rem;">Tambah Tamu Undangan</h3>
+      <form id="add-guest-form">
+        <div class="form-group">
+          <label class="form-label" for="guest_name">Nama Lengkap Tamu</label>
+          <input type="text" id="guest_name" class="form-control" placeholder="Contoh: Bpk. Bambang &amp; Keluarga" required autofocus>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="guest_phone">Nomor WhatsApp (Opsional)</label>
+          <input type="tel" id="guest_phone" class="form-control" placeholder="Contoh: 081234567890">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="guest_category">Kategori Tamu</label>
+          <select id="guest_category" class="form-control">
+            <option value="Keluarga">Keluarga</option>
+            <option value="Sahabat">Sahabat</option>
+            <option value="Rekan Kerja">Rekan Kerja</option>
+            <option value="VIP">VIP</option>
+            <option value="Umum">Umum</option>
+          </select>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('modal-add-guest').classList.remove('active')">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan &amp; Buat Link</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Share Undangan Umum -->
+  <div id="modal-share-invitation" class="modal-overlay">
+    <div class="modal-box">
+      <h3 style="color:#fff;font-size:1.2rem;margin-bottom:1rem;">Bagikan Undangan</h3>
+      <p style="color:#94a3b8;font-size:0.85rem;margin-bottom:1.25rem;">
+        Gunakan link ini untuk pratinjau umum atau bagikan link personal melalui tab <strong>Tamu Undangan</strong> agar nama tamu muncul otomatis.
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">Tautan Undangan (Pratinjau)</label>
+        <div style="display:flex;gap:0.5rem;">
+          <input type="text" id="share-general-link-input" class="form-control" readonly style="font-family:monospace;font-size:0.85rem;">
+          <button class="btn btn-primary" onclick="copyText(document.getElementById('share-general-link-input').value, 'Tautan disalin!')">
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div style="margin:1.5rem 0;">
+        <a id="share-general-wa-btn" href="#" target="_blank" class="btn btn-wa" style="width:100%;">
+          💬 Bagikan via WhatsApp
+        </a>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;">
+        <button id="close-share-modal-btn" class="btn btn-secondary">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="/js/editor.js"></script>
+</body>
+</html>

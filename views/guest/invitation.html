@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Undangan Pernikahan</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/invitation-base.css">
+  <!-- Dynamic Theme CSS inserted by JS -->
+  <link id="theme-stylesheet" rel="stylesheet" href="/themes/jawa/gebyok-joglo/theme.css">
+</head>
+<body class="theme-gebyok-joglo invitation-locked">
+
+  <div class="invitation-container invitation-wrapper">
+
+    <!-- 1. COVER SECTION (Full Viewport Height) -->
+    <section id="cover-screen" class="cover-section cover-screen">
+      <!-- Theme specific ornament hook -->
+      <div class="theme-ornament-header">
+        <svg class="ornament-gunungan ornament-arch ornament-mandala" viewBox="0 0 100 120" fill="currentColor">
+          <path d="M 50 10 Q 75 60 85 85 Q 90 105 50 115 Q 10 105 15 85 Q 25 60 50 10 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="50" cy="65" r="8" fill="currentColor" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="cover-badge-top">THE WEDDING OF</div>
+
+      <h1 id="cover-couple-names" class="cover-couple-title couple-name">
+        Mempelai
+      </h1>
+
+      <div id="cover-wedding-date" class="cover-date-highlight">
+        Tanggal Acara
+      </div>
+
+      <!-- Personalized Guest Greeting Card -->
+      <div class="guest-invitation-box guest-badge">
+        <div class="guest-greeting-label">Kepada Yth. Bapak/Ibu/Saudara/i:</div>
+        <div id="personalized-guest-name" class="guest-name-highlight">
+          Tamu Undangan
+        </div>
+        <div style="font-size:0.75rem;margin-top:0.4rem;opacity:0.75;">
+          Tanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di hari bahagia kami.
+        </div>
+      </div>
+
+      <!-- Button Buka Undangan -->
+      <div>
+        <button id="btn-open-invitation" class="btn-theme btn-open-invitation">
+          💌 BUKA UNDANGAN
+        </button>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT (Revealed after clicking Buka Undangan) -->
+    <div id="main-invitation-content" class="main-invitation-content">
+
+      <!-- 2. PEMBUKAAN -->
+      <section id="section-opening" class="content-section">
+        <div class="card-box">
+          <div class="section-title">Bismillahirrahmanirrahim</div>
+          <p id="opening-quote-text" class="opening-verse">
+            Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon rahmat dan ridho-Nya, kami bermaksud mengundang Anda untuk hadir pada hari istimewa kami.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3. NAMA MEMPELAI -->
+      <section id="section-couple" class="content-section" style="padding-top:0;">
+        <div class="card-box">
+          <div class="section-title">Mempelai</div>
+
+          <div class="couple-profile-box">
+            <h2 id="groom-full-name" class="couple-name">Nama Mempelai Pria</h2>
+            <div id="groom-parents-info" class="parents-info">Putra dari Bpk. &amp; Ibu</div>
+          </div>
+
+          <div class="ampersand">&amp;</div>
+
+          <div class="couple-profile-box">
+            <h2 id="bride-full-name" class="couple-name">Nama Mempelai Wanita</h2>
+            <div id="bride-parents-info" class="parents-info">Putri dari Bpk. &amp; Ibu</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. COUNTDOWN -->
+      <section id="section-countdown" class="content-section" style="padding-top:0;">
+        <div class="card-box">
+          <div class="section-title">Menghitung Hari</div>
+          <div class="countdown-grid">
+            <div class="countdown-item">
+              <div id="countdown-days" class="countdown-num">00</div>
+              <div class="countdown-label">Hari</div>
+            </div>
+            <div class="countdown-item">
+              <div id="countdown-hours" class="countdown-num">00</div>
+              <div class="countdown-label">Jam</div>
+            </div>
+            <div class="countdown-item">
+              <div id="countdown-minutes" class="countdown-num">00</div>
+              <div class="countdown-label">Menit</div>
+            </div>
+            <div class="countdown-item">
+              <div id="countdown-seconds" class="countdown-num">00</div>
+              <div class="countdown-label">Detik</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ACARA & LOKASI -->
+      <section id="section-events" class="content-section" style="padding-top:0;">
+        <div id="events-container">
+          <!-- Dynamically populated event cards -->
+        </div>
+      </section>
+
+      <!-- 6. RSVP FORM -->
+      <section id="section-rsvp" class="content-section" style="padding-top:0;">
+        <div class="card-box">
+          <div class="section-title">Konfirmasi Kehadiran</div>
+          <p style="text-align:center;font-size:0.875rem;opacity:0.85;margin-bottom:1.5rem;">
+            Mohon konfirmasikan kehadiran Anda demi kenyamanan bersama.
+          </p>
+
+          <div id="rsvp-form-container">
+            <form id="guest-rsvp-form" class="rsvp-form-box">
+              <div class="form-group">
+                <label class="form-label" style="text-align:center;">Status Kehadiran</label>
+                <div class="status-radio-group">
+                  <label class="status-radio-label">
+                    <input type="radio" name="attendance_status" value="Hadir" required>
+                    <span>✅ Hadir</span>
+                  </label>
+                  <label class="status-radio-label">
+                    <input type="radio" name="attendance_status" value="Masih Ragu">
+                    <span>🤔 Ragu</span>
+                  </label>
+                  <label class="status-radio-label">
+                    <input type="radio" name="attendance_status" value="Tidak Hadir">
+                    <span>❌ Maaf</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="rsvp-guest-count">Jumlah Tamu Hadir</label>
+                <select id="rsvp-guest-count" class="form-control">
+                  <option value="1">1 Orang</option>
+                  <option value="2">2 Orang</option>
+                  <option value="3">3 Orang</option>
+                  <option value="4">4 Orang</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="rsvp-message">Ucapan &amp; Doa Restu</label>
+                <textarea id="rsvp-message" class="form-control" placeholder="Tuliskan ucapan dan doa terbaik Anda untuk kedua mempelai..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-theme" style="width:100%;margin-top:1rem;">
+                Kirim Konfirmasi &amp; Ucapan
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. UCAPAN & DOA TAMU -->
+      <section id="section-wishes" class="content-section" style="padding-top:0;">
+        <div class="card-box">
+          <div class="section-title">Ucapan &amp; Doa</div>
+          <div id="public-wishes-stream" class="wishes-stream">
+            <!-- Dynamically populated wishes -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. PENUTUP -->
+      <section id="section-closing" class="content-section" style="padding-top:0;text-align:center;">
+        <div class="card-box">
+          <div class="section-title">Terima Kasih</div>
+          <p id="closing-salutation-text" style="font-size:0.95rem;line-height:1.8;opacity:0.9;margin-bottom:1.5rem;">
+            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kami berdua.
+          </p>
+          <div style="font-size:1.1rem;font-weight:700;">
+            Kami yang berbahagia,
+          </div>
+          <div class="couple-name" style="font-size:1.6rem;margin-top:0.5rem;">
+            Keluarga Besar Kedua Mempelai
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="/js/invitation.js"></script>
+</body>
+</html>

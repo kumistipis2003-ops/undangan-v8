@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Tema — Admin</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <span style="font-size:1.5rem;">💌</span>
+        <h2>Undangan<span>Admin</span></h2>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard" class="admin-nav-item">
+          <span>📊</span> Dashboard
+        </a>
+        <a href="/admin/invitations/create" class="admin-nav-item">
+          <span>➕</span> Buat Undangan
+        </a>
+        <a href="/admin/themes" class="admin-nav-item active">
+          <span>🎨</span> Katalog Tema
+        </a>
+      </nav>
+
+      <div class="admin-footer">
+        <button id="admin-logout-btn" class="btn btn-outline btn-sm" style="width:100%;">
+          🚪 Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1>Katalog Desain &amp; Tema (MVP)</h1>
+        <span class="badge badge-info">4 Desain Aktif</span>
+      </header>
+
+      <div class="admin-content">
+        <p style="color:#94a3b8;font-size:0.9rem;margin-bottom:1.5rem;">
+          Setiap tema memiliki arsitektur visual unik yang membedakan layout, ornamen, tipografi, dan gaya tombol tanpa menghilangkan data penyewa saat berganti tema.
+        </p>
+
+        <div id="themes-catalog-container" class="theme-picker-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

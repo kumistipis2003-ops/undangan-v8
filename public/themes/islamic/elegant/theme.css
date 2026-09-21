@@ -1,0 +1,190 @@
+/* ============================================================
+   TEMA: ISLAMIC ELEGANT
+   Karakter: Hijau Zamrud Mewah, Kubah Moorish, Rub el Hizb, Kaligrafi
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+  --theme-font-title: 'Amiri', serif;
+  --theme-font-script: 'Cinzel Decorative', serif;
+  --theme-font-body: 'Outfit', sans-serif;
+
+  --theme-bg-primary: #072019;
+  --theme-bg-secondary: #0d3328;
+  --theme-bg-card: rgba(10, 38, 30, 0.92);
+  --theme-border-color: #d4af37;
+  --theme-accent-gold: #f5d77f;
+  --theme-accent-dark: #041410;
+  --theme-text-light: #f6fcf9;
+  --theme-text-muted: #b7d6cb;
+  --theme-text-gold: #ffd875;
+  
+  --theme-btn-bg: linear-gradient(135deg, #d4af37, #9b791e);
+  --theme-btn-text: #051913;
+  --theme-btn-border: 1px solid #ffe89e;
+  --theme-btn-radius: 8px;
+}
+
+body.theme-islamic-elegant {
+  font-family: var(--theme-font-body);
+  background-color: var(--theme-bg-primary);
+  color: var(--theme-text-light);
+  /* Islamic geometric star arabesque pattern */
+  background-image: radial-gradient(circle at center, rgba(16, 56, 45, 0.7) 0%, rgba(5, 20, 15, 0.97) 100%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l7 13 13-7-7 13 13 7-13 7 7 13-13-7-7 13-7-13-13 7 7-13-13-7 13-7-7-13 13 7z' fill='none' stroke='%23d4af37' stroke-opacity='0.12' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+.theme-islamic-elegant .invitation-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+  border-left: 2px solid var(--theme-border-color);
+  border-right: 2px solid var(--theme-border-color);
+  background: var(--theme-bg-primary);
+}
+
+/* Cover & Hero */
+.theme-islamic-elegant .cover-section {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: radial-gradient(circle at top, rgba(20, 65, 52, 0.8) 0%, rgba(5, 20, 15, 0.98) 100%);
+  position: relative;
+}
+
+.theme-islamic-elegant .ornament-arch {
+  width: 110px;
+  height: 130px;
+  margin: 0 auto 1rem auto;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
+}
+
+.theme-islamic-elegant .bismillah-badge {
+  font-family: var(--theme-font-title);
+  font-size: 1.8rem;
+  color: var(--theme-text-gold);
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.theme-islamic-elegant .guest-badge {
+  background: rgba(13, 51, 40, 0.85);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 80px 80px 12px 12px; /* Mosque dome arch shape */
+  padding: 1.75rem 1.75rem 1.25rem 1.75rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.theme-islamic-elegant .guest-name-highlight {
+  font-family: var(--theme-font-title);
+  font-size: 1.6rem;
+  color: var(--theme-text-gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Sections & Cards */
+.theme-islamic-elegant .content-section {
+  padding: 3.5rem 1.5rem;
+  position: relative;
+}
+
+.theme-islamic-elegant .card-box {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 60px 60px 12px 12px; /* Dome top cards */
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.theme-islamic-elegant .section-title {
+  font-family: var(--theme-font-title);
+  font-size: 2rem;
+  color: var(--theme-text-gold);
+  margin-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.theme-islamic-elegant .couple-name {
+  font-family: var(--theme-font-title);
+  font-size: 2.3rem;
+  color: #fff;
+  margin: 0.5rem 0;
+  font-weight: 700;
+}
+
+.theme-islamic-elegant .ampersand {
+  font-family: var(--theme-font-title);
+  font-size: 2.2rem;
+  color: var(--theme-accent-gold);
+  display: block;
+  margin: 0.25rem 0;
+}
+
+/* Buttons */
+.theme-islamic-elegant .btn-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+  font-family: var(--theme-font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.9rem 2.25rem;
+  border: var(--theme-btn-border);
+  border-radius: var(--theme-btn-radius);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.theme-islamic-elegant .btn-theme:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+  filter: brightness(1.15);
+}
+
+/* Countdown */
+.theme-islamic-elegant .countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.theme-islamic-elegant .countdown-item {
+  background: rgba(4, 20, 16, 0.9);
+  border: 1px solid var(--theme-border-color);
+  padding: 0.85rem 0.25rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.theme-islamic-elegant .countdown-num {
+  font-family: var(--theme-font-title);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--theme-text-gold);
+}
+
+.theme-islamic-elegant .countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--theme-text-muted);
+}

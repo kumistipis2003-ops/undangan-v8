@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buat Undangan Baru — Admin</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <span style="font-size:1.5rem;">💌</span>
+        <h2>Undangan<span>Admin</span></h2>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard" class="admin-nav-item">
+          <span>📊</span> Dashboard
+        </a>
+        <a href="/admin/invitations/create" class="admin-nav-item active">
+          <span>➕</span> Buat Undangan
+        </a>
+        <a href="/admin/themes" class="admin-nav-item">
+          <span>🎨</span> Katalog Tema
+        </a>
+      </nav>
+
+      <div class="admin-footer">
+        <button id="admin-logout-btn" class="btn btn-outline btn-sm" style="width:100%;">
+          🚪 Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1>Buat Undangan Baru</h1>
+        <a href="/admin/dashboard" class="btn btn-outline btn-sm">
+          ← Kembali ke Dashboard
+        </a>
+      </header>
+
+      <div class="admin-content" style="max-width:850px;">
+        <form id="create-invitation-form" class="table-card" style="padding:2rem;">
+          <h2 style="font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid #243046;">
+            1. Informasi Dasar Undangan
+          </h2>
+
+          <div class="form-group">
+            <label class="form-label" for="invTitle">Judul Undangan</label>
+            <input type="text" id="invTitle" class="form-control" placeholder="Contoh: Pernikahan Andi &amp; Sinta" required>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label" for="groomName">Nama Mempelai Pria</label>
+              <input type="text" id="groomName" class="form-control" placeholder="Contoh: Andi Pratama" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="brideName">Nama Mempelai Wanita</label>
+              <input type="text" id="brideName" class="form-control" placeholder="Contoh: Sinta Nurhaliza" required>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label" for="weddingDate">Tanggal Pernikahan</label>
+              <input type="date" id="weddingDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="invStatus">Status Undangan</label>
+              <select id="invStatus" class="form-control">
+                <option value="1">Aktif</option>
+                <option value="0">Nonaktif</option>
+              </select>
+            </div>
+          </div>
+
+          <h2 style="font-size:1.25rem;font-weight:700;color:#fff;margin:2rem 0 1rem 0;padding-bottom:0.75rem;border-bottom:1px solid #243046;">
+            2. Pilih Desain Awal
+          </h2>
+          <p style="font-size:0.85rem;color:#94a3b8;margin-bottom:1rem;">
+            Penyewa dapat dengan mudah mengganti tema ini nanti di Editor tanpa menghilangkan data.
+          </p>
+
+          <input type="hidden" id="selected-theme-id" value="">
+          <div id="theme-picker-container" class="theme-picker-grid">
+            <!-- Dynamically populated -->
+          </div>
+
+          <div style="margin-top:2.5rem;display:flex;justify-content:flex-end;gap:1rem;">
+            <a href="/admin/dashboard" class="btn btn-secondary">Batal</a>
+            <button type="submit" class="btn btn-primary" style="padding:0.75rem 2rem;">
+              Buat Undangan Sekarang
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Success Modal with Generated Management Link -->
+  <div id="inv-success-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="font-size:2.5rem;margin-bottom:0.5rem;">🎉</div>
+        <h3 style="color:#fff;font-size:1.3rem;">Undangan Berhasil Dibuat!</h3>
+        <p style="color:#94a3b8;font-size:0.85rem;margin-top:0.25rem;">Management Link telah dibuat secara otomatis untuk Penyewa.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Management Link (Berikan link ini ke Penyewa)</label>
+        <div style="display:flex;gap:0.5rem;">
+          <input type="text" id="modal-management-link-input" class="form-control" readonly style="font-family:monospace;font-size:0.85rem;color:#60a5fa;">
+          <button id="modal-copy-link-btn" class="btn btn-primary" style="white-space:nowrap;">
+            Copy Link
+          </button>
+        </div>
+      </div>
+
+      <div style="background:#0f172a;border:1px dashed #334155;border-radius:8px;padding:0.85rem;font-size:0.8rem;color:#94a3b8;margin-bottom:1.5rem;">
+        ℹ️ <strong>Prinsip Akses:</strong> Penyewa <em>tidak membutuhkan login atau password</em>. Mereka cukup membuka link tersebut untuk mengedit data undangan dan menambah daftar tamu.
+      </div>
+
+      <div style="display:flex;gap:0.75rem;justify-content:flex-end;">
+        <a href="/admin/dashboard" class="btn btn-secondary">Tutup &amp; Ke Dashboard</a>
+        <a id="modal-open-editor-btn" href="#" target="_blank" class="btn btn-primary">
+          Buka Editor Penyewa ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

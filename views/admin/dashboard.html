@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Platform Undangan Digital</title>
+  <link rel="stylesheet" href="/css/core.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <span style="font-size:1.5rem;">💌</span>
+        <h2>Undangan<span>Admin</span></h2>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="/admin/dashboard" class="admin-nav-item active">
+          <span>📊</span> Dashboard
+        </a>
+        <a href="/admin/invitations/create" class="admin-nav-item">
+          <span>➕</span> Buat Undangan
+        </a>
+        <a href="/admin/themes" class="admin-nav-item">
+          <span>🎨</span> Katalog Tema
+        </a>
+      </nav>
+
+      <div class="admin-footer">
+        <button id="admin-logout-btn" class="btn btn-outline btn-sm" style="width:100%;">
+          🚪 Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1>Dashboard Ringkasan</h1>
+        <a href="/admin/invitations/create" class="btn btn-primary btn-sm">
+          + Buat Undangan Baru
+        </a>
+      </header>
+
+      <div class="admin-content">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📜</div>
+            <div>
+              <div id="stats-total-invitations" class="stat-val">0</div>
+              <div class="stat-label">Total Undangan</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(16,185,129,0.15);color:#34d399;">✨</div>
+            <div>
+              <div id="stats-active-invitations" class="stat-val">0</div>
+              <div class="stat-label">Undangan Aktif</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(245,158,11,0.15);color:#fbbf24;">👥</div>
+            <div>
+              <div id="stats-total-guests" class="stat-val">0</div>
+              <div class="stat-label">Total Tamu</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(236,72,153,0.15);color:#f472b6;">💌</div>
+            <div>
+              <div id="stats-total-rsvps" class="stat-val">0</div>
+              <div class="stat-label">Total RSVP</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3 style="font-size:1.1rem;font-weight:700;color:#fff;">Daftar Undangan Terdaftar</h3>
+            <span style="font-size:0.8rem;color:#94a3b8;">Klik "Copy Link" untuk membagikan Management Link ke Penyewa</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Undangan</th>
+                  <th>Tema Desain</th>
+                  <th>Tanggal Acara</th>
+                  <th>Tamu &amp; RSVP</th>
+                  <th>Status</th>
+                  <th>Aksi Manajemen</th>
+                </tr>
+              </thead>
+              <tbody id="invitations-table-body">
+                <tr>
+                  <td colspan="6" style="text-align:center;padding:2rem;color:#94a3b8;">Memuat daftar undangan...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

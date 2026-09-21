@@ -1,0 +1,189 @@
+/* ============================================================
+   TEMA: JAWA BATIK KAWUNG
+   Karakter: Soga Klasik, Motif Geometris Kawung, Filosofi Adiluhung
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+:root {
+  --theme-font-title: 'Cormorant Garamond', serif;
+  --theme-font-script: 'Cormorant Garamond', serif;
+  --theme-font-body: 'Merriweather', serif;
+
+  --theme-bg-primary: #321c10;
+  --theme-bg-secondary: #482716;
+  --theme-bg-card: rgba(50, 28, 16, 0.9);
+  --theme-border-color: #d49b55;
+  --theme-accent-gold: #f3cb85;
+  --theme-accent-dark: #1f1007;
+  --theme-text-light: #fbf5eb;
+  --theme-text-muted: #d9bfad;
+  --theme-text-gold: #f3cb85;
+  
+  --theme-btn-bg: linear-gradient(135deg, #d49b55, #a36928);
+  --theme-btn-text: #1f1007;
+  --theme-btn-border: 1px solid #f3cb85;
+  --theme-btn-radius: 30px; /* Pill button */
+}
+
+body.theme-batik-kawung {
+  font-family: var(--theme-font-body);
+  background-color: var(--theme-bg-primary);
+  color: var(--theme-text-light);
+  /* Intricate SVG interlocking Kawung pattern */
+  background-image: radial-gradient(circle at center, rgba(84, 46, 24, 0.7) 0%, rgba(31, 16, 7, 0.96) 100%),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='20' cy='10' rx='5' ry='9' fill='none' stroke='%23d49b55' stroke-opacity='0.15' stroke-width='1.5'/%3E%3Cellipse cx='20' cy='30' rx='5' ry='9' fill='none' stroke='%23d49b55' stroke-opacity='0.15' stroke-width='1.5'/%3E%3Cellipse cx='10' cy='20' rx='9' ry='5' fill='none' stroke='%23d49b55' stroke-opacity='0.15' stroke-width='1.5'/%3E%3Cellipse cx='30' cy='20' rx='9' ry='5' fill='none' stroke='%23d49b55' stroke-opacity='0.15' stroke-width='1.5'/%3E%3Ccircle cx='20' cy='20' r='2.5' fill='%23d49b55' fill-opacity='0.2'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+.theme-batik-kawung .invitation-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.85);
+  border-left: 2px solid var(--theme-border-color);
+  border-right: 2px solid var(--theme-border-color);
+  background: var(--theme-bg-primary);
+}
+
+/* Cover & Hero */
+.theme-batik-kawung .cover-section {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: radial-gradient(circle at center, rgba(72, 39, 22, 0.8) 0%, rgba(25, 12, 5, 0.98) 100%);
+  position: relative;
+}
+
+.theme-batik-kawung .ornament-mandala {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1.5rem auto;
+  animation: rotateKawung 30s linear infinite;
+}
+
+@keyframes rotateKawung {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.theme-batik-kawung .guest-badge {
+  background: rgba(45, 23, 12, 0.85);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 25px; /* Smooth rounded badge */
+  padding: 1.25rem 2rem;
+  margin: 1.75rem 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(212, 155, 85, 0.2);
+}
+
+.theme-batik-kawung .guest-name-highlight {
+  font-family: var(--theme-font-title);
+  font-size: 1.5rem;
+  color: var(--theme-accent-gold);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* Sections & Cards */
+.theme-batik-kawung .content-section {
+  padding: 3.5rem 1.5rem;
+  position: relative;
+}
+
+.theme-batik-kawung .card-box {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border-color);
+  border-radius: 16px;
+  padding: 2.25rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.theme-batik-kawung .section-title {
+  font-family: var(--theme-font-title);
+  font-size: 1.8rem;
+  color: var(--theme-accent-gold);
+  letter-spacing: 2px;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.theme-batik-kawung .couple-name {
+  font-family: var(--theme-font-title);
+  font-size: 2.4rem;
+  color: #fff;
+  margin: 0.5rem 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.theme-batik-kawung .ampersand {
+  font-family: var(--theme-font-title);
+  font-size: 2.2rem;
+  font-style: italic;
+  color: var(--theme-accent-gold);
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* Buttons */
+.theme-batik-kawung .btn-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+  font-family: var(--theme-font-title);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  padding: 0.85rem 2.25rem;
+  border: var(--theme-btn-border);
+  border-radius: var(--theme-btn-radius);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(212, 155, 85, 0.35);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.theme-batik-kawung .btn-theme:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(212, 155, 85, 0.5);
+  filter: brightness(1.1);
+}
+
+/* Countdown */
+.theme-batik-kawung .countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.theme-batik-kawung .countdown-item {
+  background: rgba(30, 15, 7, 0.9);
+  border: 1px solid rgba(212, 155, 85, 0.6);
+  padding: 0.85rem 0.25rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.theme-batik-kawung .countdown-num {
+  font-family: var(--theme-font-title);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--theme-accent-gold);
+}
+
+.theme-batik-kawung .countdown-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--theme-text-muted);
+}

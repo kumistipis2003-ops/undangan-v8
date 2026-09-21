@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-joglo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d1507"/>
+      <stop offset="50%" stop-color="#4a2611"/>
+      <stop offset="100%" stop-color="#1f0c03"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e096"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#996515"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#bg-joglo)"/>
+  <!-- Gebyok Joglo Carved Frame -->
+  <rect x="15" y="15" width="370" height="210" rx="6" fill="none" stroke="url(#gold)" stroke-width="2" stroke-dasharray="8 4"/>
+  <rect x="22" y="22" width="356" height="196" rx="4" fill="none" stroke="url(#gold)" stroke-width="1"/>
+  <!-- Gunungan Silhoutte in center -->
+  <path d="M 200 45 Q 230 110 245 140 Q 255 170 200 185 Q 145 170 155 140 Q 170 110 200 45 Z" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <path d="M 200 65 L 200 175 M 175 145 Q 200 130 225 145 M 182 120 Q 200 110 218 120" stroke="url(#gold)" stroke-width="1.5" fill="none"/>
+  <!-- Traditional Arch Top -->
+  <path d="M 50 40 Q 200 10 350 40" fill="none" stroke="url(#gold)" stroke-width="2"/>
+  <!-- Badge Title -->
+  <rect x="100" y="190" width="200" height="28" rx="14" fill="#3a1c0b" stroke="url(#gold)" stroke-width="1.5"/>
+  <text x="200" y="209" fill="#f8e7b9" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle" letter-spacing="2">GEBYOK JOGLO</text>
+  <text x="200" y="165" fill="#e8c872" font-family="'Prata', serif" font-size="14" text-anchor="middle" font-style="italic">Jawa Klasik Adiluhung</text>
+</svg>
