@@ -1,21 +1,39 @@
 // Public Guest Invitation Logic
 document.addEventListener('DOMContentLoaded', () => {
-  const pathParts = window.location.pathname.split('/');
-  const invitationSlug = pathParts[2];
-  const guestToken = pathParts[3];
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  // Expected formats: ['u', 'andi-sinta'] OR ['u', 'andi-sinta', 'guestToken']
+  const invitationSlug = pathParts[1];
+  const guestToken = pathParts[2] || '';
 
-  if (!invitationSlug || !guestToken) return;
+  if (!invitationSlug) return;
 
-  loadPublicInvitation(invitationSlug, guestToken);
+  // Read guest name from WhatsApp URL parameters (?to=... or ?nama=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const nameFromUrl = (urlParams.get('to') || urlParams.get('nama') || urlParams.get('guest') || urlParams.get('u') || '').trim();
+
+  // Instant update of guest name on cover screen even before network requests finish
+  if (nameFromUrl) {
+    const guestNameEl = document.getElementById('personalized-guest-name');
+    if (guestNameEl) {
+      guestNameEl.innerText = nameFromUrl;
+    }
+  }
+
+  loadPublicInvitation(invitationSlug, guestToken, nameFromUrl);
   initOpenInvitationButton();
-  initRsvpForm(invitationSlug, guestToken);
+  initRsvpForm(invitationSlug, guestToken, nameFromUrl);
 });
 
 let invitationData = null;
 
-async function loadPublicInvitation(slug, token) {
+async function loadPublicInvitation(slug, token, nameFromUrl) {
   try {
-    const res = await fetch(`/api/public/invitation/${slug}/${token}`);
+    const query = nameFromUrl ? `?to=${encodeURIComponent(nameFromUrl)}` : '';
+    const apiUrl = token
+      ? `/api/public/invitation/${slug}/${token}${query}`
+      : `/api/public/invitation/${slug}${query}`;
+
+    const res = await fetch(apiUrl);
     const json = await res.json();
 
     if (!json.success) {
@@ -31,9 +49,21 @@ async function loadPublicInvitation(slug, token) {
     }
 
     invitationData = json.data;
+
+    // Prioritize name directly passed from WhatsApp link
+    if (nameFromUrl) {
+      invitationData.guest.name = nameFromUrl;
+    }
+
     renderInvitationContent(invitationData);
+
+    // Auto-fill RSVP name input
+    const rsvpNameInput = document.getElementById('rsvp-guest-name');
+    if (rsvpNameInput && invitationData.guest && invitationData.guest.name && invitationData.guest.name !== 'Tamu Undangan') {
+      rsvpNameInput.value = invitationData.guest.name;
+    }
   } catch (err) {
-    console.error('Failed to load invitation', err);
+    console.error('Error loading invitation:', err);
   }
 }
 
@@ -41,26 +71,22 @@ function renderInvitationContent(data) {
   const inv = data.invitation;
   const guest = data.guest;
 
-  // Set page title
-  document.title = `${inv.groom_nickname || inv.groom_name} & ${inv.bride_nickname || inv.bride_name} — Undangan Pernikahan`;
-
-  // Apply Theme CSS Dynamically
+  // Set Theme CSS dynamically
   const themeLink = document.getElementById('theme-stylesheet');
   if (themeLink && inv.css_theme_file) {
     themeLink.href = inv.css_theme_file;
   }
+
+  // Set Body Theme Class
   document.body.className = `theme-${inv.theme_slug} invitation-locked`;
 
-  // Cover Elements
-  const coverCouple = document.getElementById('cover-couple-names');
-  if (coverCouple) coverCouple.innerText = `${inv.groom_nickname || inv.groom_name} & ${inv.bride_nickname || inv.bride_name}`;
-
-  const coverDate = document.getElementById('cover-wedding-date');
-  if (coverDate) coverDate.innerText = formatDateIndo(inv.wedding_date);
+  // Cover Screen Information
+  document.getElementById('cover-couple-names').innerText = `${inv.groom_nickname || inv.groom_name} & ${inv.bride_nickname || inv.bride_name}`;
+  document.getElementById('cover-wedding-date').innerText = formatDateIndo(inv.wedding_date);
 
   // Personalized Guest Greeting
   const guestNameEl = document.getElementById('personalized-guest-name');
-  if (guestNameEl) guestNameEl.innerText = guest.name;
+  if (guestNameEl) guestNameEl.innerText = guest.name || 'Tamu Undangan';
 
   // Opening Section
   const openingTextEl = document.getElementById('opening-quote-text');
@@ -147,18 +173,14 @@ function renderWishesStream(wishes) {
 
 function initOpenInvitationButton() {
   const openBtn = document.getElementById('btn-open-invitation');
-  const coverScreen = document.getElementById('cover-screen');
   const mainContent = document.getElementById('main-invitation-content');
 
   if (openBtn) {
     openBtn.addEventListener('click', () => {
-      // Remove locked class on body
       document.body.classList.remove('invitation-locked');
-
-      // Reveal main content
-      mainContent.classList.add('revealed');
-
-      // Smooth scroll to opening section
+      if (mainContent) {
+        mainContent.classList.add('revealed');
+      }
       const firstSection = document.getElementById('section-opening');
       if (firstSection) {
         firstSection.scrollIntoView({ behavior: 'smooth' });
@@ -200,7 +222,7 @@ function initCountdown(weddingDate, weddingTime) {
   setInterval(update, 1000);
 }
 
-function initRsvpForm(slug, token) {
+function initRsvpForm(slug, token, nameFromUrl) {
   const form = document.getElementById('guest-rsvp-form');
   if (!form) return;
 
@@ -214,18 +236,23 @@ function initRsvpForm(slug, token) {
     if (!selectedStatus) {
       alert('Silakan pilih status kehadiran Anda (Hadir / Tidak Hadir / Masih Ragu).');
       submitBtn.disabled = false;
-      submitBtn.innerText = 'Kirim Konfirmasi';
+      submitBtn.innerText = 'Kirim Konfirmasi & Ucapan';
       return;
     }
 
+    const nameInput = document.getElementById('rsvp-guest-name');
+    const guestName = (nameInput ? nameInput.value.trim() : '') || nameFromUrl || (invitationData && invitationData.guest ? invitationData.guest.name : '') || 'Tamu Undangan';
+
     const payload = {
+      guest_name: guestName,
       attendance_status: selectedStatus.value,
       guest_count: document.getElementById('rsvp-guest-count').value || 1,
       message: document.getElementById('rsvp-message').value
     };
 
     try {
-      const res = await fetch(`/api/public/rsvp/${slug}/${token}`, {
+      const rsvpUrl = token ? `/api/public/rsvp/${slug}/${token}` : `/api/public/rsvp/${slug}`;
+      const res = await fetch(rsvpUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -233,23 +260,21 @@ function initRsvpForm(slug, token) {
       const json = await res.json();
 
       if (json.success) {
-        // Show success state
         document.getElementById('rsvp-form-container').innerHTML = `
           <div style="background:rgba(16,185,129,0.2);border:1px solid #10b981;padding:1.5rem;border-radius:8px;text-align:center;">
             <div style="font-size:2rem;margin-bottom:0.5rem;">🎉</div>
-            <h3 style="color:#fff;margin-bottom:0.5rem;">Terima Kasih!</h3>
+            <h3 style="color:#fff;margin-bottom:0.5rem;">Terima Kasih, ${guestName}!</h3>
             <p style="opacity:0.9;font-size:0.95rem;">${json.message}</p>
           </div>
         `;
 
-        // Prepend wish dynamically to list if message provided
         if (payload.message && payload.message.trim().length > 0) {
           const stream = document.getElementById('public-wishes-stream');
           const newBubble = document.createElement('div');
           newBubble.className = 'wish-bubble';
           newBubble.innerHTML = `
             <div class="wish-header">
-              <span class="wish-author">${invitationData.guest.name}</span>
+              <span class="wish-author">${guestName}</span>
               <span class="wish-time">Baru saja</span>
             </div>
             <div class="wish-message">${payload.message}</div>
@@ -259,12 +284,12 @@ function initRsvpForm(slug, token) {
       } else {
         alert(json.message || 'Gagal mengirim RSVP.');
         submitBtn.disabled = false;
-        submitBtn.innerText = 'Kirim Konfirmasi';
+        submitBtn.innerText = 'Kirim Konfirmasi & Ucapan';
       }
     } catch (err) {
       alert('Terjadi kendala saat mengirim data. Silakan coba kembali.');
       submitBtn.disabled = false;
-      submitBtn.innerText = 'Kirim Konfirmasi';
+      submitBtn.innerText = 'Kirim Konfirmasi & Ucapan';
     }
   });
 }

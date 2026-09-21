@@ -507,22 +507,52 @@ function initShareModal() {
   const shareBtn = document.getElementById('header-share-btn');
   const modal = document.getElementById('modal-share-invitation');
   const closeBtn = document.getElementById('close-share-modal-btn');
+  const nameInput = document.getElementById('wa-contact-name');
+  const phoneInput = document.getElementById('wa-contact-phone');
+  const linkInput = document.getElementById('share-general-link-input');
+  const previewText = document.getElementById('share-wa-preview-text');
+  const waBtn = document.getElementById('share-general-wa-btn');
+  const copyMsgBtn = document.getElementById('btn-copy-wa-message');
+
+  function updateWaShareContent() {
+    if (!editorData || !editorData.invitation) return;
+    const inv = editorData.invitation;
+    const origin = window.location.origin;
+    const contactName = (nameInput ? nameInput.value.trim() : '') || 'Sahabat & Rekan';
+    const guestLink = `${origin}/u/${inv.slug}?to=${encodeURIComponent(contactName)}`;
+    
+    if (linkInput) linkInput.value = guestLink;
+
+    const coupleNames = `${inv.groom_nickname || inv.groom_name} & ${inv.bride_nickname || inv.bride_name}`;
+    const message = `Kepada Yth.\nBapak/Ibu/Saudara/i *${contactName}*\nDi Tempat\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami:\n\n💍 *${coupleNames}*\n\nBerikut tautan undangan kami untuk info lengkap acara:\n🔗 ${guestLink}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.\n\nTerima kasih.`;
+
+    if (previewText) previewText.value = message;
+
+    if (waBtn) {
+      const rawPhone = phoneInput ? phoneInput.value.trim().replace(/[^0-9]/g, '') : '';
+      const phone = rawPhone.startsWith('0') ? '62' + rawPhone.slice(1) : rawPhone;
+      waBtn.href = phone 
+        ? `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+    }
+  }
+
+  if (nameInput) {
+    nameInput.addEventListener('input', updateWaShareContent);
+  }
+  if (phoneInput) {
+    phoneInput.addEventListener('input', updateWaShareContent);
+  }
+
+  if (copyMsgBtn) {
+    copyMsgBtn.addEventListener('click', () => {
+      if (previewText) copyText(previewText.value, 'Pesan WhatsApp berhasil disalin!');
+    });
+  }
 
   if (shareBtn && modal) {
     shareBtn.addEventListener('click', () => {
-      const inv = editorData.invitation;
-      const origin = window.location.origin;
-      const generalUrl = `${origin}/preview/${inv.slug}`;
-
-      const linkInput = document.getElementById('share-general-link-input');
-      if (linkInput) linkInput.value = generalUrl;
-
-      const waBtn = document.getElementById('share-general-wa-btn');
-      if (waBtn) {
-        const text = `Halo,\n\nKami mengundang Anda untuk hadir di acara kami:\n${inv.title}\n\nBuka undangan di tautan berikut:\n${generalUrl}\n\nTerima kasih.`;
-        waBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-      }
-
+      updateWaShareContent();
       modal.classList.add('active');
     });
   }
